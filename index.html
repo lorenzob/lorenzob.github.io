@@ -202,7 +202,7 @@ section > *:not(.projects-grid):not(.legacy-strip) { max-width: 1280px; margin-l
 .legacy-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--text3); text-transform: uppercase; margin-bottom: 1.25rem; }
 .legacy-items { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .legacy-item { font-size: 16px; color: var(--text3); line-height: 1.55; flex: 1 1 220px; text-align: justify; hyphens: auto; }
-.legacy-item strong { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 0.25rem; }
+.legacy-item strong { display: block; font-size: 16px; font-weight: 600; color: var(--text2); margin-bottom: 0.25rem; }
 
 /* CONTACT */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
@@ -364,7 +364,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
         <div class="project-num">001 — Flagship</div>
         <div class="project-client">InfoCert / Enterprise clients</div>
         <h3 class="project-title">Identity Document OCR &amp; Verification System</h3>
-        <p class="project-desc">Two separate systems, later combined into a complete identity verification service. The first: a document processing pipeline handling paper and electronic identity documents, passports and driving licences across twenty European and non-European countries — each with different layouts, security features, print quality and degradation patterns. Field localisation, data extraction, MRZ parsing, text cleanup from worn or photographed originals. The second: a face recognition and liveness detection system, independently evaluated by NIST. Together they form an end-to-end verification flow deployed at scale for a major digital identity authority and its enterprise clients. Both have been in continuous production for over eight years.</p>
+        <p class="project-desc">Two separate systems, combined into a complete identity verification service. The first: a document processing pipeline handling paper and electronic identity documents, passports and driving licences across twenty European and non-European countries — each with different layouts, security features, print quality and degradation patterns. Field localisation, data extraction, MRZ parsing, text cleanup from worn or photographed originals. The second: a face recognition and liveness detection system, independently evaluated by NIST. Together they form an end-to-end verification flow deployed at scale for a major digital identity authority and its enterprise clients. Both have been in continuous production for over eight years.</p>
         <div class="project-tags">
           <span class="ptag">Object Detection</span><span class="ptag">OCR</span><span class="ptag">Face Recognition</span><span class="ptag">Liveness Detection</span><span class="ptag">NIST Evaluated</span><span class="ptag">TensorFlow</span><span class="ptag">Dlib</span><span class="ptag">Python</span>
         </div>
@@ -510,8 +510,6 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
 
       {"name":"Custom UNet + STLM OCR","images":["images/others-unet-ocr.jpg"],"desc":"Architecture combining UNet segmentation with a sequential text-line model for handwritten and degraded document recognition."},
 
-      {"name":"Self-sovereign authentication PoC","images":["images/others-self-sovereign.jpg"],"desc":"Keyless identity system JS library: deterministic key derivation from WebAuthn passkey system, no server-side secrets."},
-
       {
         "name": "Ancient document OCR + LLM normalization",
         "images": ["images/others-ancient-ocr-1.jpg"],
@@ -533,6 +531,8 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
         "desc": "Training data prioritisation based on per-sample loss: the batch composition is biased toward samples the current model finds hard, progressively increasing difficulty as training advances. Reduces wasted iterations on already-mastered examples."
       },
 
+      {"name":"Self-sovereign authentication PoC","images":["images/others-self-sovereign.jpg"],"desc":"Keyless identity system JS library: deterministic key derivation from WebAuthn passkey system, no server-side secrets."},
+
       {"name":"Adaptive 3D mesh generation","images":["images/others-mesh-gen.jpg"],"desc":"PoV-adaptive terrain mesh with dynamic LOD (quadtree), terrain following, collision detection and physics engine. Java/OpenGL."}
 
     ]'>
@@ -551,10 +551,6 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             <span id="others-placeholder-text">images/others-face-detection.jpg</span>
           </div>
-          <div class="img-nav">
-            <button class="img-btn" id="others-prev">&#8592;</button>
-            <button class="img-btn" id="others-next">&#8594;</button>
-          </div>
           <span class="img-counter" id="others-counter">1 / 6</span>
         </div>
         <div id="others-img-caption" style="font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;padding:0.6rem 0.75rem;background:var(--bg3);border-top:1px solid var(--border2);">Face detection system</div>
@@ -563,6 +559,10 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
         <div class="project-num">Others &amp; experiments</div>
         <h3 class="project-title" id="others-title">Face detection system</h3>
         <p class="project-desc" id="others-desc">RetinaFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale.</p>
+        <div class="img-nav" style="position:static;align-self:flex-end;margin-top:auto;padding-top:1rem;">
+          <button class="img-btn" id="others-prev" style="font-size:16px;padding:5px 14px;">&#8592;</button>
+          <button class="img-btn" id="others-next" style="font-size:16px;padding:5px 14px;">&#8594;</button>
+        </div>
       </div>
     </div>
 
@@ -576,8 +576,8 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <div class="legacy-label">Production systems from a previous chapter</div>
     <div class="legacy-items">
       <div class="legacy-item">
-        <strong>Fuel Depot Automation Platform</strong>
-        End-to-end Java operation platform for industrial fuel terminals, deployed across <strong>6+ sites</strong> in Italy — initially deployed at ENI Rho, one of the country's largest fuel terminals, and since expanded to include RAM Milazzo and others.
+        <strong>Fuel Depot Automation Platform - ENI</strong>
+        End-to-end Java operation platform for industrial fuel terminals, <strong style="display:inline">currently deployed across 6+ sites</strong> in Italy — initially deployed at ENI Rho, one of the country's largest fuel terminals, and since expanded to include RAM Milazzo and others.
 
         The platform manages the full loading workflow for high-volume tanker bays and industrial dispensers supplying trucks for retail fuel distribution. It orchestrates every physical touchpoint on-site — storage tanks, barriers, weighbridges, badge readers, and cameras — via Modbus communication, ensuring precise coordination between hardware and business logic at scale.
       </div>
@@ -632,7 +632,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:flex-end;">
-      <p style="font-family:var(--font-mono);font-size:12px;color:var(--text3);line-height:1.8;letter-spacing:0.04em;">The more specific about the problem,<br>the better. I don't need a brief —<br>just tell me what's not working.</p>
+      <p style="font-family:var(--font-mono);font-size:12px;color:var(--text3);line-height:1.8;letter-spacing:0.04em;"></p>
     </div>
   </div>
 </section>
