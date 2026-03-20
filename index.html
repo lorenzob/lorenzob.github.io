@@ -412,7 +412,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       <div class="project-body">
         <div class="project-num">003</div>
         <h3 class="project-title">Bookshelf Inventory Detection</h3>
-        <p class="project-desc">PWA for automated book inventory from a single shelf photo. Detects 200+ densely packed, tilted, partially occluded spines using oriented bounding box detection, with LLM-based title validation to handle ambiguous OCR output. No installation required.</p>
+        <p class="project-desc">PWA for automated book inventory from a single shelf photo. Detects 200+ densely packed, tilted, partially occluded spines combining oriented bounding box detection (for exact item tracking), with LLM-based OCR to handle ambiguous OCR output semantically. No installation required.</p>
         <div class="project-tags">
           <span class="ptag">OBB Detection</span><span class="ptag">OCR</span><span class="ptag">LLM Validation</span><span class="ptag">PWA</span><span class="ptag">Python</span>
         </div>
@@ -495,7 +495,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       </div>
       <div class="project-body">
         <div class="project-num">007</div>
-        <h3 class="project-title">RLHF Fine-tuning Pipeline</h3>
+        <h3 class="project-title">RLHF Fine-tuning Pipeline PoC</h3>
         <p class="project-desc">End-to-end RLHF pipeline for domain-adapted language models built on TRL and Unsloth with LLaMA-family base models. Preference dataset construction, reward model training and PPO fine-tuning — optimised for single-GPU with quantisation-aware LoRA.</p>
         <div class="project-tags">
           <span class="ptag">RLHF</span><span class="ptag">TRL</span><span class="ptag">Unsloth</span><span class="ptag">LLaMA</span><span class="ptag">LoRA / QLoRA</span>
@@ -506,23 +506,16 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
 
     <!-- OTHERS FEATURED -->
     <div class="project-card featured" id="others-featured" data-others='[
-      {"name":"Face detection system","images":["images/others-face-detection.jpg"],"desc":"RetinaFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale."},
+      {"name":"Face detection system","images":["images/others-face-detection.jpg"],"desc":"RetinaNet/ArcFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale."},
 
       {"name":"Custom UNet + STLM OCR","images":["images/others-unet-ocr.jpg"],"desc":"Architecture combining UNet segmentation with a sequential text-line model for handwritten and degraded document recognition."},
 
-      {"name":"Self-sovereign authentication PoC","images":["images/others-self-sovereign.jpg"],"desc":"Keyless identity system in JS: deterministic key derivation from WebAuthn passkey system, no server-side secrets."},
-
-      {"name":"Adaptive 3D mesh generation","images":["images/others-mesh-gen.jpg"],"desc":"PoV-adaptive terrain mesh with dynamic LOD (quadtree), terrain following, collision detection and physics engine. Java/OpenGL."},
+      {"name":"Self-sovereign authentication PoC","images":["images/others-self-sovereign.jpg"],"desc":"Keyless identity system JS library: deterministic key derivation from WebAuthn passkey system, no server-side secrets."},
 
       {
-        "name": "Adaptive sample difficulty",
-        "images": ["images/others-sample-difficulty-1.jpg"],
-        "desc": "Training data prioritisation based on per-sample loss: the batch composition is biased toward samples the current model finds hard, progressively increasing difficulty as training advances. Reduces wasted iterations on already-mastered examples."
-      },
-      {
-        "name": "Ancient document OCR + LLM correction",
+        "name": "Ancient document OCR + LLM normalization",
         "images": ["images/others-ancient-ocr-1.jpg"],
-        "desc": "Two-stage pipeline: classical OCR with bounding-box localisation followed by LLM semantic correction constrained to each detected region. The spatial grounding prevents the model from hallucinating outside the verified text boxes — higher fidelity than unconstrained LLM transcription."
+        "desc": "Two-stage pipeline: classical OCR with bounding-box localisation followed by LLM semantic correction constrained to each detected region. The spatial grounding allows finer control over recognized text while LLM visual analysis handles complex layout semantically — higher fidelity than unconstrained LLM transcription."
       },
       {
         "name": "Document deformation correction",
@@ -533,7 +526,15 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
         "name": "Colour region classifier",
         "images": ["images/others-colour-region-1.jpg"],
         "desc": "Children&#39;s game: colour identification and clustering in hand-drawn regions photographed in unconstrained real-world conditions — free lighting, free white balance. Robust to the full range of ambient light a child&#39;s bedroom can produce."
-      }
+      },
+      {
+        "name": "Training data prioritisation",
+        "images": ["images/others-sample-difficulty-1.jpg"],
+        "desc": "Training data prioritisation based on per-sample loss: the batch composition is biased toward samples the current model finds hard, progressively increasing difficulty as training advances. Reduces wasted iterations on already-mastered examples."
+      },
+
+      {"name":"Adaptive 3D mesh generation","images":["images/others-mesh-gen.jpg"],"desc":"PoV-adaptive terrain mesh with dynamic LOD (quadtree), terrain following, collision detection and physics engine. Java/OpenGL."}
+
     ]'>
     <!-- 
       {
@@ -575,8 +576,10 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <div class="legacy-label">Production systems from a previous chapter</div>
     <div class="legacy-items">
       <div class="legacy-item">
-        <strong>Fuel depot automation — ENI Rho</strong>
-        Full Java integration layer for one of Italy’s largest fuel terminals: managing high-volume tanker loading bays and industrial dispensers that refill trucks for retail distribution. The system coordinates the entire workflow—barriers, weighbridges, badge readers, and cameras—via Modbus communication.
+        <strong>Fuel Depot Automation Platform</strong>
+        End-to-end Java operation platform for industrial fuel terminals, deployed across <strong>6+ sites</strong> in Italy — initially deployed at ENI Rho, one of the country's largest fuel terminals, and since expanded to include RAM Milazzo and others.
+
+        The platform manages the full loading workflow for high-volume tanker bays and industrial dispensers supplying trucks for retail fuel distribution. It orchestrates every physical touchpoint on-site — storage tanks, barriers, weighbridges, badge readers, and cameras — via Modbus communication, ensuring precise coordination between hardware and business logic at scale.
       </div>
       <div class="legacy-item">
         <strong>InfoCert integration platform</strong>
