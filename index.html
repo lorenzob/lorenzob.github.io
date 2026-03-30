@@ -200,9 +200,15 @@ section > *:not(.projects-grid):not(.legacy-strip) { max-width: 1280px; margin-l
 /* LEGACY */
 .legacy-strip { padding: 2.5rem; background: var(--bg2); border: 1px solid var(--border2); }
 .legacy-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--text3); text-transform: uppercase; margin-bottom: 1.25rem; }
+.legacy-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.legacy-feat-img { overflow: hidden; aspect-ratio: 16/9; }
+.legacy-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%); }
+.legacy-feat-body { font-size: 16px; color: var(--text3); line-height: 1.55; text-align: justify; hyphens: auto; }
+.legacy-feat-body strong { display: block; font-size: 16px; font-weight: 600; color: var(--text2); margin-bottom: 0.25rem; }
 .legacy-items { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .legacy-item { font-size: 16px; color: var(--text3); line-height: 1.55; flex: 1 1 220px; text-align: justify; hyphens: auto; }
 .legacy-item strong { display: block; font-size: 16px; font-weight: 600; color: var(--text2); margin-bottom: 0.25rem; }
+@media (max-width: 700px) { .legacy-featured { grid-template-columns: 1fr; } }
 
 /* CONTACT */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
@@ -508,7 +514,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <div class="project-card featured" id="others-featured" data-others='[
       {"name":"Face detection system","images":["images/others-face-detection.jpg"],"desc":"RetinaNet/ArcFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale."},
 
-      {"name":"Custom UNet + STLM OCR","images":["images/others-unet-ocr.jpg"],"desc":"Architecture combining UNet segmentation with a sequential text-line model for handwritten and degraded document recognition."},
+      {"name":"Custom UNet + STLM OCR","images":["images/others-unet-ocr.jpg"],"desc":"Architecture combining UNet segmentation with a sequential text-line model for complex and degraded document recognition."},
 
       {
         "name": "Ancient document OCR + LLM normalization",
@@ -558,7 +564,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       <div class="project-body">
         <div class="project-num">Others &amp; experiments</div>
         <h3 class="project-title" id="others-title">Face detection system</h3>
-        <p class="project-desc" id="others-desc">RetinaFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale.</p>
+        <p class="project-desc" id="others-desc">RetinaNet/ArcFace-based production pipeline for real-time face detection, metrics and demographic analytics at scale.</p>
         <div class="img-nav" style="position:static;align-self:flex-end;margin-top:auto;padding-top:1rem;">
           <button class="img-btn" id="others-prev" style="font-size:16px;padding:5px 14px;">&#8592;</button>
           <button class="img-btn" id="others-next" style="font-size:16px;padding:5px 14px;">&#8594;</button>
@@ -574,13 +580,18 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
   <div class="section-label">03 — Historical context</div>
   <div class="legacy-strip">
     <div class="legacy-label">Production systems from a previous chapter</div>
-    <div class="legacy-items">
-      <div class="legacy-item">
-        <strong>Fuel Depot Automation Platform - ENI</strong>
+    <div class="legacy-featured">
+      <div class="legacy-feat-img">
+        <img src="images/historical-petrol.jpg" alt="Fuel Depot Automation Platform - Loginet/ENI">
+      </div>
+      <div class="legacy-feat-body">
+        <strong>Fuel Depot Automation Platform - Loginet/ENI</strong>
         End-to-end Java operation platform for industrial fuel terminals, <strong style="display:inline">currently deployed across 6+ sites</strong> in Italy — initially deployed at ENI Rho, one of the country's largest fuel terminals, and since expanded to include RAM Milazzo and others.
 
         The platform manages the full loading workflow for high-volume tanker bays and industrial dispensers supplying trucks for retail fuel distribution. It orchestrates every physical touchpoint on-site — storage tanks, barriers, weighbridges, badge readers, and cameras — via Modbus communication, ensuring precise coordination between hardware and business logic at scale.
       </div>
+    </div>
+    <div class="legacy-items">
       <div class="legacy-item">
         <strong>InfoCert integration platform</strong>
         Middleware backbone (Camel / ServiceMix) underpinning InfoCert's electronic invoicing service and several enterprise integrations. <strong style="display:inline">In production for over 15 years</strong>.
@@ -625,7 +636,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
   <div class="contact-grid">
     <div>
       <h2 class="contact-intro">Tell me about<br><em>your problem</em></h2>
-      <p class="contact-note">Available for consulting on computer vision, document AI, LLM integration and production ML systems. Short-to-medium engagements preferred. I work best when the problem is concrete and the stakes are real.<br><br>Milan-based. Remote engagements across Europe welcome.</p>
+      <p class="contact-note">Available for consulting on computer vision, document AI, LLM integration and production ML systems. I work best when the problem is concrete and the stakes are real.<br><br>Milan-based. Remote engagements across Europe welcome.</p>
       <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem;">
         <a href="mailto:lorenzo.bolzani@gmail.com" style="font-family:var(--font-mono);font-size:14px;color:var(--accent);text-decoration:none;letter-spacing:0.05em;">lorenzo.bolzani@gmail.com →</a>
         <a href="https://www.linkedin.com/in/lorenzo-bolzani-045b15/" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:14px;color:var(--text2);text-decoration:none;letter-spacing:0.05em;">linkedin.com/in/lorenzobolzani →</a>
@@ -870,6 +881,15 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       e.stopPropagation();
       othersIdx = (othersIdx + 1) % othersData.length;
       othersRender(othersIdx);
+    });
+  }
+
+  // ── Legacy featured image → lightbox ────────────────────────────────────
+  var legacyFeatImg = document.querySelector('.legacy-feat-img img');
+  if (legacyFeatImg) {
+    legacyFeatImg.style.cursor = 'zoom-in';
+    legacyFeatImg.addEventListener('click', function() {
+      openLightbox([legacyFeatImg.getAttribute('src')], 0);
     });
   }
 })();
