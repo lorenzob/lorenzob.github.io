@@ -977,6 +977,12 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
         burger.setAttribute('aria-expanded', 'false');
       });
     });
+    document.addEventListener('click', function(e) {
+      if (!navLinksEl.classList.contains('open')) return;
+      if (navLinksEl.contains(e.target) || burger.contains(e.target)) return;
+      navLinksEl.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
   }
 
   // ── Back to top ─────────────────────────────────────────────────────────
