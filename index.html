@@ -64,8 +64,8 @@ nav {
 
 /* HERO */
 .hero {
-  min-height: 60vh; display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 7rem 3rem 5rem; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; padding: 7rem 3rem 3rem; position: relative; overflow: hidden;
 }
 .hero::before {
   content: ''; position: absolute; top: -10%; right: -5%;
@@ -74,7 +74,7 @@ nav {
   pointer-events: none;
 }
 .hero-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; }
-.hero h1 { font-family: var(--font-display); font-size: clamp(4rem, 9vw, 8rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--text); margin-bottom: 2rem; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--text); margin-bottom: 2rem; }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero-sub { max-width: 580px; font-size: 19px; color: var(--text2); line-height: 1.65; margin-bottom: 3rem; }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -83,10 +83,10 @@ nav {
 .hero-scroll { position: absolute; bottom: 2rem; right: 3rem; font-family: var(--font-mono); font-size: 11px; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; writing-mode: vertical-rl; }
 
 /* SECTIONS */
-section { padding: 6rem 3rem; border-top: 1px solid var(--border2); }
+section { padding: 4rem 3rem; border-top: 1px solid var(--border2); }
 section > *:not(.projects-grid):not(.legacy-strip) { max-width: 1280px; margin-left: auto; margin-right: auto; }
 .projects-grid, .legacy-strip { max-width: 1280px; margin-left: auto; margin-right: auto; }
-.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
 
 /* ABOUT */
@@ -271,6 +271,67 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
 .writing-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--accent2); text-transform: uppercase; margin-top: auto; padding-top: 0.5rem; }
 .writing-note { max-width: 1280px; margin: 1.5rem auto 0; font-size: 13px; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.05em; }
 
+/* EXPANDABLE TEXT */
+.expandable {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.expandable.expanded {
+  display: block;
+  overflow: visible;
+}
+.expand-btn {
+  display: none;
+  background: none; border: none;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--accent); cursor: pointer;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 0; margin-top: 4px;
+}
+
+/* HERO CAROUSEL */
+.hero-carousel {
+  position: relative; width: 100%; overflow: hidden;
+  background: #000; margin: 1.75rem auto 1.5rem;
+  flex-shrink: 0;
+}
+.hc-track { position: relative; width: 100%; height: 100%; }
+.hc-slide { position: absolute; inset: 0; opacity: 0; z-index: 0; }
+.hc-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.hc-controls {
+  position: absolute; bottom: 0.65rem; right: 0.65rem;
+  display: flex; gap: 5px; z-index: 10;
+}
+.hc-btn {
+  font-family: var(--font-mono); font-size: 11px; line-height: 1;
+  background: rgba(26,46,61,0.78); color: var(--text2);
+  border: 1px solid var(--border2); padding: 5px 10px; cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+}
+.hc-btn:hover { background: rgba(26,46,61,0.96); color: var(--accent); }
+.hc-btn.hc-paused { color: var(--accent); border-color: rgba(157,196,216,0.4); }
+.hc-dots {
+  position: absolute; bottom: 0.65rem; left: 0.65rem;
+  display: flex; gap: 6px; align-items: center; z-index: 10;
+}
+.hc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text3); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.hc-dot.active { background: var(--accent); transform: scale(1.4); }
+.hc-progress {
+  position: absolute; bottom: 0; left: 0; height: 2px;
+  background: var(--accent); opacity: 0.5; width: 0%;
+  z-index: 10; pointer-events: none;
+}
+.hero-carousel.hc-window {
+  position: fixed !important; inset: 0 !important; z-index: 500;
+  width: 100vw !important; max-width: none !important;
+  height: 100vh !important; aspect-ratio: unset !important;
+  margin: 0 !important; background: #0d1a24; padding: 3vw;
+}
+
 /* BURGER + BACK TO TOP */
 .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; color: var(--text2); }
 .nav-burger:hover { color: var(--accent); }
@@ -300,7 +361,14 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
   }
   .nav-links a { font-size: 14px; }
   .nav-links.open { display: flex; }
+  .hero { padding-top: 4.5rem; padding-bottom: 2.5rem; min-height: 0; }
   .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero-sub { font-size: 16px; margin-bottom: 1.5rem; }
+  .hero-tags { gap: 0.35rem; }
+  .tag { font-size: 10px; padding: 4px 9px; }
+  .stat-num { font-size: 1.65rem; }
+  .stat-label { font-size: 10px; }
+  .stat { padding: 1rem; }
   .what-grid { grid-template-columns: 1fr; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -311,6 +379,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
   .others-header, .others-grid { grid-column: span 1; }
   .form-row { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .expand-btn { display: inline-block; }
   /* Lightbox on mobile */
   .lightbox { padding: 1rem; }
   .lightbox img { max-width: 94vw; max-height: 70vh; }
@@ -349,8 +418,8 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
 <section class="hero">
   <div class="hero-inner">
   <div class="hero-label">Available for consulting — Milan / Remote</div>
-  <h1>Lorenzo<br><em>Bolzani</em></h1>
-  <p class="hero-sub">Real-world ML systems — computer vision, document AI, LLM agents integrated with existing processes. From first experiment to something that runs.</p>
+  <h1>Lorenzo Bolzani</h1>
+  <p class="hero-sub">Real-world ML systems — computer vision, document AI, LLM agents integrated with existing processes. From first experiments to a complete product.</p>
   <div class="hero-tags">
     <span class="tag accent">Computer Vision</span>
     <span class="tag">Object Detection</span>
@@ -358,6 +427,19 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <span class="tag">OCR / Document AI</span>
     <span class="tag">System Architecture</span>
   </div>
+  <!-- HERO CAROUSEL -->
+  <div id="hero-carousel" class="hero-carousel" style="display:none">
+    <div id="hc-track" class="hc-track"></div>
+    <div id="hc-dots" class="hc-dots"></div>
+    <div class="hc-controls">
+      <button class="hc-btn" id="hc-prev" title="Previous group">&#8592;</button>
+      <button class="hc-btn" id="hc-pause" title="Pause">&#9646;&#9646;</button>
+      <button class="hc-btn" id="hc-next" title="Next group">&#8594;</button>
+      <button class="hc-btn" id="hc-fs" title="Fullscreen"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+    </div>
+    <div id="hc-progress" class="hc-progress"></div>
+  </div>
+
   <a href="#contact" style="display:inline-block;margin-top:2rem;font-family:var(--font-mono);font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:0.08em;">Get in touch →</a>
   </div>
   <span class="hero-scroll">Scroll</span>
@@ -375,17 +457,17 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <div class="what-card">
       <div class="what-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="m7 12 10-5.5M7 12l10 5.5"/></svg></div>
       <h3 class="what-title">LLMs embedded in real workflows</h3>
-      <p class="what-desc">LLM agents that reason across ambiguous input, operate within domain-specific constraints, and produce output your existing systems can use — structured data, code, API calls, hardware commands. The interesting engineering is in the integration: custom DSLs, tool design, feedback loops that make unreliable output trustworthy.</p>
+      <p class="what-desc">LLM agents that work within domain-specific constraints and produce output your existing systems can use — structured data, code, API calls, hardware commands. Custom DSLs, tool design, feedback loops.</p>
     </div>
     <div class="what-card">
       <div class="what-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="7" width="9" height="10" rx="1.5"/><rect x="13" y="7" width="9" height="10" rx="1.5"/><path d="M11 12h2"/></svg></div>
       <h3 class="what-title">AI on top of existing systems</h3>
-      <p class="what-desc">I work with teams to find where AI actually fits in their specific process — experiments, focused prototypes, realistic evaluation. When the direction is clear, I add the AI layer to your existing systems: ERPs, cameras, devices — without rewriting what works.</p>
+      <p class="what-desc">Working with teams to find where AI fits in their process — experiments, focused prototypes, realistic evaluation. Adding the AI layer without rewriting what already works.</p>
     </div>
     <div class="what-card">
       <div class="what-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
       <h3 class="what-title">From prototype to deployment</h3>
-      <p class="what-desc">I've shipped systems that have been running for 20 years. I can get to a working prototype quickly, and I know what it takes to keep it running after that.</p>
+      <p class="what-desc">I get to working prototypes quickly, and I know what it takes to keep them running. Some of the systems I shipped are still in production after 20 years.</p>
     </div>
   </div>
 </section>
@@ -404,7 +486,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       </div>
     </div>
     <div class="about-text">
-    <p>I started writing software before the web existed and have been doing machine learning seriously since 2016 — which means I understand both why SIFT still matters, when XGBoost on well-engineered features beats a neural network, and when a diffusion model is the right tool. My background is in systems that have to work under real-world conditions: noisy data, legal constraints, hardware that misbehaves, users who are not data scientists.</p>
+    <p>My background spans from enterprise systems programming to machine learning and computer vision since 2016. That range has practical value: I know why SIFT still has a place, when XGBoost on good features beats a neural network, and when a diffusion model is the right tool. I work on systems under real-world constraints — noisy data, legal requirements, hardware that misbehaves, users who are not data scientists.</p>
     <p>Recent focus: computer vision for complex detection problems, document AI, and LLM agents. <strong>I work primarily with the open-source ecosystem — from academic paper implementations to recent research repositories.</strong> I build domain-specific tooling at the intersection of classical CV and modern deep learning and LLMs where neither alone is sufficient.</p>
     <p>I work independently as a consultant on defined engagements. Milan-based, comfortable working remotely across Europe.</p>
     </div>
@@ -680,7 +762,7 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
     <a class="writing-card" href="https://medium.com/shallowlearnings/spatial-tiled-processing-for-large-images-with-convolutional-neural-networks-3936ed7aebec" target="_blank" rel="noopener">
       <div class="writing-date">Nov 2017</div>
       <div class="writing-title">Location-aware kernels for large image tiled processing</div>
-      <div class="writing-desc">Working on OCR of large noisy images, I needed CNNs to know where in the global image each tile was being processed. The solution — injecting explicit spatial coordinates as extra channels — was developed independently while building an operational system, <strong style="display:inline">eight months before Uber AI Labs published the same idea as CoordConv at NeurIPS 2018</strong>. The right answer to a real problem, found twice.</div>
+      <div class="writing-desc">Working on OCR of large noisy images, I needed CNNs to know where in the global image each tile was being processed. The solution — injecting explicit spatial coordinates as extra channels — was developed independently while building an operational system, eight months before Uber AI Labs published the same idea as CoordConv at NeurIPS 2018.</div>
       <div class="writing-tag">Computer Vision · Independent research → converged with NeurIPS 2018</div>
     </a>
     <a class="writing-card" href="https://medium.com/shallowlearnings/evaluating-document-alignment-accuracy-380bfdc00e75" target="_blank" rel="noopener">
@@ -690,7 +772,6 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       <div class="writing-tag">Document AI · Quality estimation without labels</div>
     </a>
   </div>
-  <p class="writing-note">// Both articles written while building real systems — not as academic exercises.</p>
 </section>
 
 <!-- CONTACT -->
@@ -735,6 +816,27 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
   <button class="lb-next" id="lb-next">&#8594;</button>
   <span class="lb-caption" id="lb-caption"></span>
 </div>
+
+<!-- ── CAROUSEL CONFIG ─────────────────────────────────────────────────── -->
+<!-- Edit this block to configure the hero carousel.                        -->
+<!-- transition: 'flat' (crossfade) | 'blur' (blur only) | 'blur-zoom'       -->
+<!-- duration: milliseconds per slide                                        -->
+<script>
+var CAROUSEL_CONFIG = {
+  height: 400,            // px — max height cap (actual height follows aspect ratio)
+  aspectRatio: '16/9',    // CSS aspect-ratio — set to match your images (e.g. '4/3', '3/2')
+  defaultDuration: 4500,  // ms — default time per slide if not set per group
+  groups: [
+    { images: ['images/id-car1.jpg', 'images/id-car2.jpg'],   transition: 'blur-zoom', duration: 1500 },
+    { images: ['images/sandra-plc-ui.jpg'],                                   transition: 'flat', duration: 3000 },
+    { images: ['images/diff-car1.jpg', 'images/diff-car2.jpg', 'images/diff-car3.jpg'],           transition: 'blur', duration: 1250 },
+    { images: ['images/bookshelf-demo.jpg', 'images/bookshelf-detail.jpg'],   transition: 'flat', duration: 1800 },
+    { images: ['images/skeleton-1.jpg'],                                      transition: 'blur', duration: 3000 },
+    { images: ['images/dewrap-car1.jpg', 'images/dewrap-car2.jpg', 'images/dewrap-car3.jpg'], transition: 'blur', duration: 800 },
+    { images: ['images/others-mesh-gen.jpg', 'images/others-mesh-gen-2.jpg'], transition: 'blur', duration: 800 },
+  ]
+};
+</script>
 
 <script>
 (function() {
@@ -1059,6 +1161,288 @@ footer { border-top: 1px solid var(--border2); padding: 2rem 3rem; display: flex
       function() { document.getElementById('others-next').click(); },
       function() { document.getElementById('others-prev').click(); }
     );
+  }
+
+  // ── Hero Carousel ────────────────────────────────────────────────────────
+  (function() {
+    var cfg = window.CAROUSEL_CONFIG;
+    var carouselEl = document.getElementById('hero-carousel');
+    if (!carouselEl) return;
+    if (!cfg || !cfg.groups || !cfg.groups.length) { carouselEl.style.display = 'none'; return; }
+
+    var track      = document.getElementById('hc-track');
+    var dotsEl     = document.getElementById('hc-dots');
+    var progressEl = document.getElementById('hc-progress');
+    var hcPause    = document.getElementById('hc-pause');
+    var hcPrev     = document.getElementById('hc-prev');
+    var hcNext     = document.getElementById('hc-next');
+    var hcFs       = document.getElementById('hc-fs');
+
+    var h  = cfg.height || 400;
+    var ar = cfg.aspectRatio || '16/9';
+    var parts = ar.split('/');
+    var arNum = parseFloat(parts[0]) / parseFloat(parts[1]);
+    carouselEl.style.aspectRatio = ar;
+    carouselEl.style.maxWidth    = (h * arNum) + 'px';
+    carouselEl.style.height      = 'auto';
+    carouselEl.style.display = '';
+
+    // Build flat slide list
+    var slides = [];
+    cfg.groups.forEach(function(g, gi) {
+      (g.images || []).forEach(function(src, ii) {
+        slides.push({
+          src: src, groupIdx: gi, localIdx: ii, localTotal: (g.images||[]).length,
+          transition: g.transition || 'flat',
+          duration: g.duration || cfg.defaultDuration || 4000
+        });
+      });
+    });
+    if (!slides.length) { carouselEl.style.display = 'none'; return; }
+
+    // Create slide elements
+    var slideEls = slides.map(function(s) {
+      var div = document.createElement('div');
+      div.className = 'hc-slide';
+      var img = document.createElement('img');
+      img.src = s.src; img.alt = '';
+      div.appendChild(img);
+      track.appendChild(div);
+      return div;
+    });
+
+    // Create group dots
+    var numGroups = cfg.groups.length;
+    var dotEls = [];
+    cfg.groups.forEach(function(g, gi) {
+      var dot = document.createElement('div');
+      dot.className = 'hc-dot';
+      dot.addEventListener('click', function() { goToGroup(gi); });
+      dotsEl.appendChild(dot);
+      dotEls.push(dot);
+    });
+
+    var currentIdx     = 0;
+    var pendingIdx     = 0;
+    var isPaused       = false;
+    var isAnim         = false;
+    var timer          = null;
+    var transTimer     = null;
+    var groupStartTime = 0;
+    var groupDuration  = 0;
+    var pauseStart     = 0;
+
+    function groupStart(gi) {
+      for (var i = 0; i < slides.length; i++) { if (slides[i].groupIdx === gi) return i; }
+      return 0;
+    }
+
+    function updateDots() {
+      var cg = slides[currentIdx].groupIdx;
+      dotEls.forEach(function(d, i) { d.classList.toggle('active', i === cg); });
+    }
+
+    function startProgress(dur) {
+      if (!progressEl) return;
+      groupDuration  = dur;
+      groupStartTime = Date.now();
+      progressEl.style.transition = 'none';
+      progressEl.style.width = '0%';
+      progressEl.offsetWidth;
+      progressEl.style.transition = 'width ' + dur + 'ms linear';
+      progressEl.style.width = '100%';
+    }
+
+    function freezeProgress() {
+      if (!progressEl) return;
+      var w = getComputedStyle(progressEl).width;
+      progressEl.style.transition = 'none';
+      progressEl.style.width = w;
+    }
+
+    function resumeProgress() {
+      if (!progressEl) return;
+      var remaining = groupDuration - (Date.now() - groupStartTime);
+      if (remaining <= 0) { progressEl.style.width = '100%'; return; }
+      progressEl.style.transition = 'none';
+      progressEl.offsetWidth;
+      progressEl.style.transition = 'width ' + remaining + 'ms linear';
+      progressEl.style.width = '100%';
+    }
+
+    function nextSameGroup(idx) {
+      var nextIdx = (idx + 1) % slides.length;
+      return slides[nextIdx].groupIdx === slides[idx].groupIdx;
+    }
+
+    function groupTotalDuration(gi) {
+      var total = 0;
+      slides.forEach(function(s) { if (s.groupIdx === gi) total += s.duration; });
+      return total;
+    }
+
+    function scheduleNext(idx) {
+      if (timer) clearTimeout(timer);
+      var sameGroup = nextSameGroup(idx);
+      if (isPaused && !sameGroup) {
+        // During pause, loop back to first image of current group (if group has >1 image)
+        var gs = groupStart(slides[idx].groupIdx);
+        if (gs !== idx) {
+          timer = setTimeout(function() { showSlide(gs); }, slides[idx].duration);
+        }
+        return;
+      }
+      timer = setTimeout(function() {
+        showSlide((idx + 1) % slides.length);
+      }, slides[idx].duration);
+    }
+
+    function showSlide(newIdx) {
+      if (newIdx === pendingIdx) { scheduleNext(currentIdx); return; }
+      pendingIdx = newIdx;
+      if (transTimer) clearTimeout(transTimer);
+      isAnim = true;
+      var oldEl   = slideEls[currentIdx];
+      var newEl   = slideEls[newIdx];
+      var type = slides[newIdx].transition || 'flat';
+      var dur  = type === 'blur-zoom' ? 900 : 600;
+
+      function cleanup() {
+        oldEl.style.transition = ''; oldEl.style.opacity = '0';
+        oldEl.style.zIndex = '0'; oldEl.style.filter = ''; oldEl.style.transform = '';
+        newEl.style.transition = ''; newEl.style.opacity = '1';
+        newEl.style.zIndex = '1'; newEl.style.filter = ''; newEl.style.transform = '';
+        var prevGroup = slides[currentIdx].groupIdx;
+        currentIdx = newIdx;
+        isAnim = false;
+        updateDots();
+        if (slides[currentIdx].groupIdx !== prevGroup) {
+          startProgress(groupTotalDuration(slides[currentIdx].groupIdx));
+        }
+        scheduleNext(currentIdx);
+      }
+
+      newEl.style.transition = 'none';
+      newEl.style.opacity    = '0';
+      newEl.style.zIndex     = '2';
+      if (type === 'blur-zoom') { newEl.style.filter = 'blur(16px)'; newEl.style.transform = 'scale(1.06)'; }
+
+      requestAnimationFrame(function() { requestAnimationFrame(function() {
+        // Staggered fade: new fades IN first (while old=1, luminance stays 1.0),
+        // then old fades OUT with a CSS delay — eliminates the dark-dip at midpoint.
+        var fadeIn  = Math.round(dur * 0.6);
+        var fadeOut = Math.round(dur * 0.6);
+        var delay   = Math.round(dur * 0.4);
+        var tNew = type === 'blur-zoom'
+          ? 'opacity ' + fadeIn + 'ms ease-out, filter ' + fadeIn + 'ms ease-out, transform ' + fadeIn + 'ms ease-out'
+          : 'opacity ' + fadeIn + 'ms ease-out';
+        newEl.style.transition = tNew;
+        newEl.style.opacity    = '1';
+        if (type === 'blur-zoom') { newEl.style.filter = 'blur(0px)'; newEl.style.transform = 'scale(1)'; }
+        oldEl.style.transition = 'opacity ' + fadeOut + 'ms ease-in ' + delay + 'ms';
+        oldEl.style.opacity    = '0';
+      }); });
+
+      transTimer = setTimeout(cleanup, dur + 60);
+    }
+
+    function goToGroup(gi) {
+      if (timer) clearTimeout(timer);
+      if (transTimer) clearTimeout(transTimer);
+      // Hard reset: wipe all slides, show first of new group immediately
+      slideEls.forEach(function(el) {
+        el.style.transition = '';
+        el.style.opacity    = '0';
+        el.style.zIndex     = '0';
+        el.style.filter     = '';
+        el.style.transform  = '';
+      });
+      var idx = groupStart(gi);
+      slideEls[idx].style.opacity = '1';
+      slideEls[idx].style.zIndex  = '1';
+      currentIdx = idx;
+      pendingIdx = idx;
+      isAnim     = false;
+      updateDots();
+      startProgress(groupTotalDuration(gi));
+      if (isPaused) { pauseStart = Date.now(); freezeProgress(); }
+      scheduleNext(idx);
+    }
+
+    // Init first slide
+    slideEls[0].style.opacity = '1';
+    slideEls[0].style.zIndex  = '1';
+    updateDots();
+    startProgress(groupTotalDuration(0));
+    scheduleNext(0);
+
+    // Controls
+    hcPrev.addEventListener('click', function() {
+      var cg = slides[pendingIdx].groupIdx;
+      goToGroup((cg - 1 + numGroups) % numGroups);
+    });
+    hcNext.addEventListener('click', function() {
+      var cg = slides[pendingIdx].groupIdx;
+      goToGroup((cg + 1) % numGroups);
+    });
+    hcPause.addEventListener('click', function() {
+      isPaused = !isPaused;
+      hcPause.classList.toggle('hc-paused', isPaused);
+      hcPause.innerHTML = isPaused ? '&#9654;' : '&#9646;&#9646;';
+      if (isPaused) {
+        pauseStart = Date.now();
+        // Stop any pending cross-group timer; within-group timers keep running
+        if (timer && !nextSameGroup(pendingIdx)) clearTimeout(timer);
+        freezeProgress();
+      } else {
+        groupStartTime += Date.now() - pauseStart;
+        // If the paused loop left us at the last slide of a multi-image group,
+        // restart the group — otherwise we'd jump to the next group after just one frame
+        if (!nextSameGroup(currentIdx) && groupStart(slides[currentIdx].groupIdx) !== currentIdx) {
+          goToGroup(slides[currentIdx].groupIdx);
+        } else {
+          resumeProgress();
+          scheduleNext(currentIdx);
+        }
+      }
+    });
+
+    // Windowed expand
+    hcFs.addEventListener('click', function() {
+      var isWindow = carouselEl.classList.toggle('hc-window');
+      document.body.style.overflow = isWindow ? 'hidden' : '';
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && carouselEl.classList.contains('hc-window')) {
+        carouselEl.classList.remove('hc-window');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Swipe
+    addSwipe(carouselEl,
+      function() { hcNext.click(); },
+      function() { hcPrev.click(); }
+    );
+  })();
+
+  // ── Mobile expand/collapse ───────────────────────────────────────────────
+  if (window.innerWidth <= 900) {
+    var expandSelectors = ['.what-desc', '.project-desc', '.writing-desc', '.about-text', '.legacy-feat-body', '.legacy-item'];
+    expandSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        if (el.textContent.trim().length < 160) return;
+        el.classList.add('expandable');
+        var btn = document.createElement('button');
+        btn.className = 'expand-btn';
+        btn.textContent = 'read more ↓';
+        btn.addEventListener('click', function() {
+          var isExpanded = el.classList.toggle('expanded');
+          btn.textContent = isExpanded ? 'read less ↑' : 'read more ↓';
+        });
+        el.parentNode.insertBefore(btn, el.nextSibling);
+      });
+    });
   }
 })();
 </script>
