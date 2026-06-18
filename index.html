@@ -1409,14 +1409,10 @@ var CAROUSEL_CONFIG = {
 
     // Windowed expand
     hcFs.addEventListener('click', function() {
-      var isWindow = carouselEl.classList.toggle('hc-window');
-      document.body.style.overflow = isWindow ? 'hidden' : '';
+      carouselEl.classList.toggle('hc-window');
     });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && carouselEl.classList.contains('hc-window')) {
-        carouselEl.classList.remove('hc-window');
-        document.body.style.overflow = '';
-      }
+      if (e.key === 'Escape') carouselEl.classList.remove('hc-window');
     });
 
     // Swipe
