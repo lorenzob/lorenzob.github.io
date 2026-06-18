@@ -1408,11 +1408,18 @@ var CAROUSEL_CONFIG = {
     });
 
     // Windowed expand
+    var savedScrollY = 0;
+    function exitWindow() {
+      carouselEl.classList.remove('hc-window');
+      window.scrollTo(0, savedScrollY);
+    }
     hcFs.addEventListener('click', function() {
-      carouselEl.classList.toggle('hc-window');
+      var isWindow = carouselEl.classList.toggle('hc-window');
+      if (isWindow) { savedScrollY = window.scrollY; }
+      else { exitWindow(); }
     });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') carouselEl.classList.remove('hc-window');
+      if (e.key === 'Escape' && carouselEl.classList.contains('hc-window')) exitWindow();
     });
 
     // Swipe
